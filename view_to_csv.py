@@ -1,40 +1,16 @@
 
 
-# import pandas as pd
-# import mysql.connector
-
-# # Database connection
-# connection = mysql.connector.connect(
-#     host="localhost",
-#     user="root",
-#     password="password",
-#     database="projectportfolio",
-#     auth_plugin='password'  # Use the compatible authentication method
-
-# )
-# # Query the data
-# query = "SELECT location, TotalPopulation, PopulationDensity, InfectionRate, DeathRate, DiabetesPrevelance, SmokerRate, CardioVascDeaRate, GDP_Per_Capita, AverageAge FROM CountryInfectionDeathStats"
-
-# df = pd.read_sql(query, connection)
-
-# # Save to CSV
-# df.to_csv(r'C:\Users\arytn\OneDrive\Documents\Dance Data\SQL_Projects\countrycovidstats.csv', index=False)
-
-# # Close the connection
-# connection.close()
-
 import pandas as pd
 import csv
 import mysql.connectorcode co
-# Define your database connection string
 
 # # Database connection
 connection = mysql.connector.connect(
     host="localhost",
-    user="root",
-    password="password",
+    user="",
+    password="",
     database="projectportfolio",
-    auth_plugin='password'  # Use the compatible authentication method
+    auth_plugin=''  
 )
 query = "SELECT location, TotalPopulation, PopulationDensity, InfectionRate, DeathRate, DiabetesPrevelance, SmokerRate, CardioVascDeaRate, GDP_Per_Capita, AverageAge FROM CountryInfectionDeathStats"
 
