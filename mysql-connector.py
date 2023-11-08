@@ -50,7 +50,7 @@ with open(csv_file, newline='') as file:
 
     for row in csv_data:
         # Convert the 'date' column from 'MM/DD/YYYY' to 'YYYY-MM-DD' format
-        date_str = row[3]  # Assuming 'date' is in the 4th position (0-based index)
+        date_str = row[3]  
         date_obj = datetime.strptime(date_str, '%m/%d/%Y')
         row[3] = date_obj.strftime('%Y-%m-%d')
 
