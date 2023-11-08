@@ -126,7 +126,7 @@
 
 -- creating view to store data for later visulaizations
 
-create view  PercentPopulationVaccinated aspercentpopulationvaccinated
+create view  PercentPopulationVaccinated as
 select dea.continent,
 dea.location,
 dea.date,
@@ -146,7 +146,37 @@ order by 2,3
 select *
 from PercentPopulationVaccinated
 
+-- compare deaths, population people vaccinated, by continent
 
+select dea.location, dea.date, dea.total_deaths, vac.total_vaccinations, dea.population,
+	(dea.total_deaths/dea.population)*100 as DeathRate, 
+	(vac.total_vaccinations/dea.population)*100 as VaccinationRate
+from coviddeaths dea
+join covidvaccinations vac
+	on dea.location = vac.location
+    and dea.date = vac.date
+where dea.continent is null
+
+-- sum total vaccinations and death rate by continent
+create view  WorldVacDeaRate as
+select dea.location,  dea.date, sum(vac.total_vaccinations) as total_vaccinations,
+	(sum(vac.total_vaccinations)/sum(dea.population))*100 as VaccinationRate,
+	(sum(dea.total_deaths)/sum(dea.population))*100 as DeathRate
+from coviddeaths dea
+join covidvaccinations vac on 
+	dea.location = vac.location and dea.date = vac.date
+where dea.continent is null
+group by dea.location, dea.date
+
+select *
+from WorldVacDeaRate
+where date > "2021-01-01"
+
+-- population density compared to infection rate
+select location, avg(population_density) as PopulationDensity,
+	avg(total_cases/population) as InfectionRate
+from coviddeaths
+group by location
 
 
 
